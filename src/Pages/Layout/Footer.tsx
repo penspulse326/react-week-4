@@ -1,9 +1,6 @@
 import styled from "styled-components"
 
 const FooterWrapper = styled.footer`
-  position: fixed;
-  bottom: 0;
-
   display: flex;
   flex-direction: column;
   justify-content: center;

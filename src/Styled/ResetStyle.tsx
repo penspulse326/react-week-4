@@ -1,6 +1,5 @@
-import styled, { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from "styled-components"
 
-export const MQ_MD = "@media (max-width: 992px)";
 
 export const ResetStyle = createGlobalStyle`
      /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -51,32 +50,6 @@ export const ResetStyle = createGlobalStyle`
           border-collapse: collapse;
           border-spacing: 0;    
      }
-
-     * {
-          box-sizing: border-box;
-     }
-
-     a {
-          color: white;
-          text-decoration: none;
-     }
-
-     #root {
-          display: flex;
-          justify-content: center;
-          align-items: flex-start;
-
-          width: 100vw;
-          height: 100vh;
-          background-image: linear-gradient(#fc6c48 0%, #ef5081 100%);
-     }
 `
-export const Container = styled.div`
-  margin: 0 auto;
-  max-width: 992px;
 
-  ${MQ_MD} {
-     padding: 15px;
-     width: 100%;
-  }
-`
+
