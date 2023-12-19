@@ -13,7 +13,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Login />}></Route>
             <Route path="signup" element={<SignUp />}></Route>
-            <Route path="user/:id" element={<Todo />}></Route>
+            <Route path="todo" element={<Todo />}></Route>
           </Route>
         </Routes>
       </HashRouter>
