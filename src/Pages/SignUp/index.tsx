@@ -47,7 +47,7 @@ const SignUp = () => {
       alert(res.message);
     } else {
       setToken(signInResponse.token);
-      navigate("todo");
+      navigate("todo", { state: { nickname: res.nickname } });
     }
   };
 

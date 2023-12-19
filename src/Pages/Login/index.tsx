@@ -33,7 +33,7 @@ const Login = () => {
       alert(res.message);
     } else {
       setToken(res.token);
-      navigate("todo");
+      navigate("todo", { state: { nickname: res.nickname } });
     }
   };
 
