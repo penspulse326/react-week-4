@@ -18,20 +18,25 @@ const SignUp = () => {
     register,
     getValues,
     formState: { errors },
-  } = useForm<InputsType>({ mode: 'all', });
+  } = useForm<InputsType>({ mode: "all" });
 
-  const onSubmit: SubmitHandler<InputsType> = async ({ email, password, nickname }) => {
+  const onSubmit: SubmitHandler<InputsType> = async ({
+    email,
+    password,
+    nickname,
+  }) => {
     const data = {
       email,
       password,
-      nickname
-    }
+      nickname,
+    };
 
-    const res = await apiSignUp(data)
-    console.log(res)
-  }
+    const res = await apiSignUp(data);
+    console.log(res);
+  };
 
-  const comparePassword = (value: string) => value === getValues("password") || "密碼不一致"
+  const comparePassword = (value: string) =>
+    value === getValues("password") || "密碼不一致";
 
   return (
     <FormWrapper>
@@ -55,12 +60,18 @@ const SignUp = () => {
         </label>
         <label>
           <div>確認密碼</div>
-          <Input type="password" {...register("compare", { ...rules.compare, validate: comparePassword })} />
+          <Input
+            type="password"
+            {...register("compare", {
+              ...rules.compare,
+              validate: comparePassword,
+            })}
+          />
           <InputAlert>{errors.compare?.message}</InputAlert>
         </label>
         <FormButton type="submit">註冊</FormButton>
       </Form>
-      <FormLink to="/signup">已經有帳號了嗎？點此登入</FormLink>
+      <FormLink to="/">已經有帳號了嗎？點此登入</FormLink>
     </FormWrapper>
   );
 };
