@@ -1,24 +1,53 @@
-import { FormWrapper, Title, SubTitle, Form, InputWrapper, Input, InputAlert, FormButton, FormLink, } from "../../components/Form"
+import { useForm, SubmitHandler } from "react-hook-form";
+import {
+  FormWrapper,
+  Title,
+  SubTitle,
+  Form,
+  FormButton,
+  FormLink,
+  Input,
+  InputAlert
+} from "../../Styled/FormStyle";
+import { rules } from "./rules";
 
-const Login = () => (
-  <FormWrapper>
-    <Title>歡迎使用土肚力^O^</Title>
-    <SubTitle>反正寫了也不一定會做</SubTitle>
-    <Form>
-      <InputWrapper>
-        <div>電子信箱</div>
-        <Input type="text" />
-        <InputAlert>123</InputAlert>
-      </InputWrapper>
-      <InputWrapper>
-        <div>密碼</div>
-        <Input type="text" />
-        <InputAlert></InputAlert>
-      </InputWrapper>
-      <FormButton type="button">登入</FormButton>
-    </Form>
-    <FormLink to="/signup">第一次使用嗎？點此註冊</FormLink>
-  </FormWrapper>
-)
+
+const Login = () => {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<InputsType>({ mode: 'all', });
+
+  const onSubmit: SubmitHandler<InputsType> = (data) => console.log(data);
+
+  return (
+    <FormWrapper>
+      <Title>歡迎使用土肚力^O^</Title>
+      <SubTitle>反正寫了也不一定會做</SubTitle>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <label>
+          <div>電子信箱</div>
+          <Input type="email" {...register("email", rules.email)} />
+          <InputAlert>
+            {errors.email?.message}
+          </InputAlert>
+        </label>
+        <label>
+          <div>密碼</div>
+          <Input type="password" {...register("password", rules.password)} />
+          <InputAlert>{errors.password?.message}</InputAlert>
+        </label>
+        <FormButton type="submit">登入</FormButton>
+      </Form>
+      <FormLink to="/signup">第一次使用嗎？點此註冊</FormLink>
+    </FormWrapper>
+  );
+};
+
+type InputsType = {
+  email: RegExp;
+  password: string;
+};
 
 export default Login;

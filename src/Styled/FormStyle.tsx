@@ -21,20 +21,28 @@ export const FormWrapper = styled.section`
   color: #333;
 
   ${MQ_MD} {
-   max-width: 351px;
+    max-width: 351px;
   }
-`
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    font-size: 18px;
+  }
+`;
 
 export const Title = styled.h1`
   font-size: 28px;
   font-weight: 700;
-`
+`;
 
 export const SubTitle = styled.h2`
   color: gray;
   font-size: 18px;
   font-weight: 700;
-`
+`;
 
 export const Form = styled.form`
   display: flex;
@@ -45,25 +53,7 @@ export const Form = styled.form`
   margin-top: 20px;
 
   text-align: center;
-`
-
-export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  font-size: 18px;
-`
-
-export const Input = styled.input`
-  padding: 8px 20px;
-  width: 240px;
-
-  border: 1px solid #888;
-  border-radius: 20px;
-
-  font-size: 18px;
-`
+`;
 
 export const FormButton = styled.button`
   margin-top: 20px;
@@ -89,7 +79,7 @@ export const FormButton = styled.button`
 
     color: black;
   }
-`
+`;
 
 export const FormLink = styled(Link)`
   display: block;
@@ -100,7 +90,7 @@ export const FormLink = styled(Link)`
   background-position: left bottom;
   background-size: 0 3px;
   background-repeat: no-repeat;
-  
+
   color: black;
 
   transition: 0.3s;
@@ -108,6 +98,16 @@ export const FormLink = styled(Link)`
   &:hover {
     background-size: 100% 3px;
   }
+`;
+
+export const Input = styled.input`
+  padding: 8px 20px;
+  width: 240px;
+
+  border: 1px solid #888;
+  border-radius: 20px;
+
+  font-size: 18px;
 `
 
 export const InputAlert = styled.span`
