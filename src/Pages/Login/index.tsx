@@ -11,8 +11,11 @@ import {
 } from "../../Styled/FormStyle";
 import { rules } from "./rules";
 import { apiSignIn } from "../../api";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
+  const { setToken } = useAuth();
+
   const {
     handleSubmit,
     register,
@@ -23,7 +26,12 @@ const Login = () => {
     const data = { email, password };
 
     const res = await apiSignIn(data);
-    console.log(res);
+
+    if (res.status) {
+      setToken(res.token);
+    } else {
+      alert(res.message);
+    }
   };
 
   return (

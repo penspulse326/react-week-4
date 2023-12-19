@@ -5,11 +5,6 @@ axios.defaults.baseURL = "https://todolist-api.hexschool.io";
 export const apiSignUp = async (data: SignUpDataType) => {
   try {
     const response = await axios.post(API_SIGN_UP, data);
-
-    if (!response.data.status) {
-      return response.data.message;
-    }
-
     return response.data;
   } catch (err) {
     console.log(err);
@@ -19,11 +14,6 @@ export const apiSignUp = async (data: SignUpDataType) => {
 export const apiSignIn = async (data: SignInDataType) => {
   try {
     const response = await axios.post(API_SIGN_IN, data);
-
-    if (!response.data.status) {
-      return response.data.message;
-    }
-
     return response.data;
   } catch (err) {
     console.log(err);
