@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormWrapper } from "../../components/Form"
+import { FormWrapper } from "../../Styled/FormStyle"
 import { Nav, Name, LogoutButton, InputTodo, TodoList, TodoItemWrapper, TodoToggle, TodoContent, DeleteButton } from "./styled";
 import ImgClose from "../../assets/icon-close.svg"
 
