@@ -12,11 +12,11 @@ import {
 import { rules } from "./rules";
 import { apiSignIn, apiSignUp } from "../../api";
 import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const { token, setToken } = useAuth();
-
-  console.log(token);
+  const { setToken } = useAuth();
+  const navigate = useNavigate();
 
   const {
     handleSubmit,
@@ -47,6 +47,7 @@ const SignUp = () => {
       alert(res.message);
     } else {
       setToken(signInResponse.token);
+      navigate("todo", { state: { nickname: res.nickname } });
     }
   };
 
