@@ -7,19 +7,32 @@ import {
   FormButton,
   FormLink,
   Input,
-  InputAlert
+  InputAlert,
 } from "../../Styled/FormStyle";
 import { rules } from "./rules";
-
+import { apiSignIn } from "../../api";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
+  const { setToken } = useAuth();
+
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<InputsType>({ mode: 'all', });
+  } = useForm<InputsType>({ mode: "all" });
 
-  const onSubmit: SubmitHandler<InputsType> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<InputsType> = async ({ email, password }) => {
+    const data = { email, password };
+
+    const res = await apiSignIn(data);
+
+    if (!res.status) {
+      alert(res.message);
+    } else {
+      setToken(res.token);
+    }
+  };
 
   return (
     <FormWrapper>
@@ -29,9 +42,7 @@ const Login = () => {
         <label>
           <div>電子信箱</div>
           <Input type="email" {...register("email", rules.email)} />
-          <InputAlert>
-            {errors.email?.message}
-          </InputAlert>
+          <InputAlert>{errors.email?.message}</InputAlert>
         </label>
         <label>
           <div>密碼</div>
