@@ -10,6 +10,7 @@ import {
   FormLink,
 } from "../../Styled/FormStyle";
 import { rules } from "./rules";
+import { apiSignUp } from "../../api";
 
 const SignUp = () => {
   const {
@@ -19,7 +20,16 @@ const SignUp = () => {
     formState: { errors },
   } = useForm<InputsType>({ mode: 'all', });
 
-  const onSubmit: SubmitHandler<InputsType> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<InputsType> = async ({ email, password, nickname }) => {
+    const data = {
+      email,
+      password,
+      nickname
+    }
+
+    const res = await apiSignUp(data)
+    console.log(res)
+  }
 
   const comparePassword = (value: string) => value === getValues("password") || "密碼不一致"
 
@@ -35,8 +45,8 @@ const SignUp = () => {
         </label>
         <label>
           <div>暱稱</div>
-          <Input type="text" {...register("username", rules.username)} />
-          <InputAlert>{errors.username?.message}</InputAlert>
+          <Input type="text" {...register("nickname", rules.nickname)} />
+          <InputAlert>{errors.nickname?.message}</InputAlert>
         </label>
         <label>
           <div>密碼</div>
@@ -48,9 +58,9 @@ const SignUp = () => {
           <Input type="password" {...register("compare", { ...rules.compare, validate: comparePassword })} />
           <InputAlert>{errors.compare?.message}</InputAlert>
         </label>
-        <FormButton type="button">登入</FormButton>
+        <FormButton type="submit">註冊</FormButton>
       </Form>
-      <FormLink to="/signup">第一次使用嗎？點此註冊</FormLink>
+      <FormLink to="/signup">已經有帳號了嗎？點此登入</FormLink>
     </FormWrapper>
   );
 };
@@ -58,7 +68,7 @@ const SignUp = () => {
 type InputsType = {
   email: RegExp;
   password: string;
-  username: string;
+  nickname: string;
   compare: string;
 };
 

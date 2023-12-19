@@ -1,5 +1,5 @@
 export const rules = {
-  username: {
+  nickname: {
     required: {
       value: true,
       message: "必填"
