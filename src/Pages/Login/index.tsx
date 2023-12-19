@@ -27,10 +27,10 @@ const Login = () => {
 
     const res = await apiSignIn(data);
 
-    if (res.status) {
-      setToken(res.token);
-    } else {
+    if (!res.status) {
       alert(res.message);
+    } else {
+      setToken(res.token);
     }
   };
 

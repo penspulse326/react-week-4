@@ -10,9 +10,14 @@ import {
   FormLink,
 } from "../../Styled/FormStyle";
 import { rules } from "./rules";
-import { apiSignUp } from "../../api";
+import { apiSignIn, apiSignUp } from "../../api";
+import { useAuth } from "../../context/AuthContext";
 
 const SignUp = () => {
+  const { token, setToken } = useAuth();
+
+  console.log(token);
+
   const {
     handleSubmit,
     register,
@@ -32,7 +37,17 @@ const SignUp = () => {
     };
 
     const res = await apiSignUp(data);
-    console.log(res);
+    if (!res.status) {
+      alert(res.message);
+      return;
+    }
+    // 註冊成功才往下執行
+    const signInResponse = await apiSignIn({ email, password });
+    if (!signInResponse.status) {
+      alert(res.message);
+    } else {
+      setToken(signInResponse.token);
+    }
   };
 
   const comparePassword = (value: string) =>
