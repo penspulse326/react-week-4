@@ -12,7 +12,9 @@ import {
   DeleteButton,
 } from "./styled";
 import ImgClose from "../../assets/icon-close.svg";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { apiSignOut } from "../../api";
+import { useAuth } from "../../context/AuthContext";
 
 const TodoItem = ({ data }: { data: TodoItemType }) => {
   const { id, content, isCompleted } = data;
@@ -31,8 +33,17 @@ const TodoItem = ({ data }: { data: TodoItemType }) => {
 };
 
 const Todo = () => {
-  const [list, setList] = useState<TodoItemType[]>([]);
+  const { token, setToken } = useAuth();
   const { nickname } = useLocation().state;
+
+  const [list, setList] = useState<TodoItemType[]>([]);
+
+  const navigate = useNavigate();
+  const handleSignOut = async () => {
+    const res = await apiSignOut(token);
+    alert(res.message);
+    navigate("/");
+  };
 
   return (
     <FormWrapper>
@@ -40,7 +51,7 @@ const Todo = () => {
         <h1>
           <Name>{nickname}</Name> 的土肚力
         </h1>
-        <LogoutButton>登出</LogoutButton>
+        <LogoutButton onClick={handleSignOut}>登出</LogoutButton>
       </Nav>
       <InputTodo placeholder="點此輸入後按下 Enter 新增" />
       <TodoList>
