@@ -36,18 +36,19 @@ const SignUp = () => {
       nickname,
     };
 
-    const res = await apiSignUp(data);
-    if (!res.status) {
-      alert(res.message);
+    const response = await apiSignUp(data);
+    if (!response.status) {
+      alert(response.message);
       return;
     }
     // 註冊成功才往下執行
     const signInResponse = await apiSignIn({ email, password });
     if (!signInResponse.status) {
-      alert(res.message);
+      alert(signInResponse.message);
     } else {
-      setToken(signInResponse.token);
-      navigate("todo", { state: { nickname: res.nickname } });
+      const { token, nickname } = signInResponse;
+      setToken(token);
+      navigate("/todo", { state: { nickname } });
     }
   };
 

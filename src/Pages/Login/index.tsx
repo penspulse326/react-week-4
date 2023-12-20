@@ -27,13 +27,13 @@ const Login = () => {
   const onSubmit: SubmitHandler<InputsType> = async ({ email, password }) => {
     const data = { email, password };
 
-    const res = await apiSignIn(data);
-
-    if (!res.status) {
-      alert(res.message);
+    const response = await apiSignIn(data);
+    if (!response.status) {
+      alert(response.message);
     } else {
-      setToken(res.token);
-      navigate("todo", { state: { nickname: res.nickname } });
+      const { token, nickname } = response;
+      setToken(token);
+      navigate("todo", { state: { nickname } });
     }
   };
 

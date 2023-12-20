@@ -1,22 +1,41 @@
 import axios from "axios";
-import { API_SIGN_IN, API_SIGN_UP } from "./API_PATH";
-axios.defaults.baseURL = "https://todolist-api.hexschool.io";
+export const API_CHECKOUT = "/users/checkout";
+export const API_GET_TODO = "/todos";
+export const API_ADD_TODO = "/todos";
+export const API_UPDATE_TODO = (id: string) => `/todos/${id}`;
+export const API_TOGGLE_TODO = (id: string) => `/todos/${id}`;
+export const API_DELETE_TODO = (id: string) => `/todos/${id}/toggle`;
+
+const todoAPI = axios.create({
+  baseURL: "https://todolist-api.hexschool.io",
+});
 
 export const apiSignUp = async (data: SignUpDataType) => {
   try {
-    const response = await axios.post(API_SIGN_UP, data);
-    return response.data;
-  } catch (err) {
-    console.log(err);
+    const res = await todoAPI.post("/users/sign_up", data);
+    return res.data;
+  } catch (error) {
+    console.log(error);
   }
 };
 
 export const apiSignIn = async (data: SignInDataType) => {
   try {
-    const response = await axios.post(API_SIGN_IN, data);
-    return response.data;
-  } catch (err) {
-    console.log(err);
+    const res = await todoAPI.post("/users/sign_in", data);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const apiSignOut = async (token: string) => {
+  const config = { headers: { Authorization: token } };
+
+  try {
+    const res = await todoAPI.post("/users/sign_out", {}, config);
+    return res.data;
+  } catch (error) {
+    console.log(error);
   }
 };
 
